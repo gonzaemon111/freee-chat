@@ -58,4 +58,6 @@ gem 'html2slim'
 gem 'carrierwave'
 gem 'sprockets-rails'
 gem 'jquery-rails'
+gem 'redis'
+gem 'redis-rails'
 
