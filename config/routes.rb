@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'rooms#index'
   resources :users, only: [:index, :edit, :update]
-  resources :rooms, only: [:index]
+  resources :rooms, only: [:index, :new, :create, :update] do
+    resources :messages, only: [:index, :create]
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Serve websocket cable requests in-process

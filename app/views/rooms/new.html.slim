@@ -1,0 +1,36 @@
+.chat-group-form
+  h1 新規チャットグループ
+  = form_for @room do |f|
+    - if @room.errors.any?
+      .chat-group-form__errors
+        h2= "# room.errors.full_messages.count 件のエラーが発生しました。"
+        ul
+          - @room.errors.full_messages.each do |message|
+            li= message
+    .chat-group-form__field
+      .chat-group-form__field--left
+        = f.label :グループ名, class: 'chat-group-form__label'
+      .chat-group-form__field--right
+        = f.text_field :name, class: 'chat__group_name chat-group-form__input', placeholder: 'グループ名を入力してください'
+    .chat-group-form__field.clearfix
+      .chat-group-form__field--left
+        = f.label :チャットメンバーを追加, class: 'chat-group-form__label'
+      .chat-group-form__field--right
+        .chat-group-form__search
+          input#user-search-field.chat-group-form__input placeholder='追加したいユーザー名を入力してください' type='text'
+          #user-search-result
+    .chat-group-form__field.clearfix
+      .chat-group-form__field--left
+        = f.label :チャットメンバー, class: 'chat-group-form__label'
+      .chat-group-form__field--right
+        #chat-group-users
+          - @room.users.each do |user|
+            .chat-group-user.clearfix#chat-group-user-22
+              = f.hidden_field :user_ids, value: current_user.id, multiple: true
+              p.chat-group-user__name
+                = user.name
+
+    .chat-group-form__field.clearfix
+      .chat-group-form__field--left
+      .chat-group-form__field--right
+        = f.submit class: 'chat-group-form__action-btn'
