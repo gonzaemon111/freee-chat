@@ -1,0 +1,12 @@
+.message "data-message-id": message.id
+  .up-message
+    .up-message__user-name
+      = message.user.name
+    .up-message__date
+      = message.created_at.to_s(:published_on)
+  .down-message
+    - if message.content.present?
+      p.down-message__content
+        = message.content
+    - if message.image.present?
+      = image_tag message.image.url, class: "down-message__image"
