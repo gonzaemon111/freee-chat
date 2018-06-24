@@ -1,4 +1,5 @@
 App.room = App.cable.subscriptions.create "RoomChannel",
+  # クライアントサイドの処理を受け持つチャンネル
   connected: ->
     # Called when the subscription is ready for use on the server
 

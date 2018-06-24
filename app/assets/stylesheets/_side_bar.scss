@@ -1,20 +1,22 @@
 .side-bar{
-  background-color: #2F3E51;
+  background-color: #38AEF0;
   width: 300px;
   color: #FAFAFA;
   box-sizing: border-box;
-  height: 100vh;
+  height: calc(100vh - 80px);
 
   .header{
-    background-color: #253141;
+    background-color: #38AEF0;
     height: 100px;
     line-height: 100px;
     padding: 0 20px;
 
     &__name{
       display: inline-block;
+      font-family: arial black;
       font-size: 16px;
       font-weight: bold;
+      color: #F0F8FF;
     }
 
     &__lists{
@@ -22,13 +24,14 @@
       float: right;
 
       .list{
+        font-family: arial black;
         display: inline-block;
 
         .icon{
           font-size: 16px;
         }
         .icon:before{
-          color: white;
+          color: black;
         }
       }
     }
@@ -37,20 +40,23 @@
   .groups{
     height: calc(100vh-100px);
     padding: 0 20px;
-    background: #2f3e51;
+    background: #38AEF0;
+    font-family: arial;
 
     .group{
       box-sizing: border-box;
       padding: 20px 0 40px;
 
       &__name{
+        font-family: arial black;
         font-size: 15px;
-        color: #FFFFFF;
+        color: #101010;
       }
       &__message{
+        font-family: arial black;
         font-size: 11px;
         margin-top: 5px;
-        color: #FAFAFA;
+        color: #101010;
       }
     }
   }

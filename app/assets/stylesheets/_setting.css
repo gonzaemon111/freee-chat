@@ -108,7 +108,7 @@ sub {
 input,
 textarea,
 select {
-    font-family:inherit;
+    font-family:        arial black;
     font-size:inherit;
     font-weight:inherit;
 }
