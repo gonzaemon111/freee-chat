@@ -14,15 +14,16 @@ a{
 
 
 .chatspace{
-  width: calc(100vw - 300px);
-  background-color: #FAFAFA;
+  width: calc(100vw - 200px);
+  background-color: #F0F8FF;
   float: right;
+  height: 88vh;
 
   .header{
     box-sizing: border-box;
     height: 100px;
     padding: 0 40px;
-    background-color: White;
+    background-color: #F0F8FF;
 
     .left-header{
       float: left;
@@ -61,10 +62,10 @@ a{
   }
 
   .messages{
-    background-color: #FAFAFA;
+    background-color: #F0F8FF;
     overflow: scroll;
     padding: 46px 40px 0px;
-    height: calc(100vh - 100px - 90px);
+    height: calc(100vh - 270px);
     box-sizing: border-box;
 
     .message{

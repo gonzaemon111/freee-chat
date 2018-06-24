@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: :update
+  before_action :set_room, only: [:edit , :update , :show , :destroy]
   def index
   end
 
@@ -8,19 +8,38 @@ class RoomsController < ApplicationController
     @room.users << current_user
   end
 
+  def show
+    @message = Message.new
+  end
+
   def create
     @room = Room.new(room_params)
     @room.users << current_user
 
     if @room.save
-      redirect_to rooms_path(@room)
-      flash[:notice] = 'roomができました。'
+      redirect_to rooms_path
+      flash[:notice] = "Room of #{@room} creates!"
     else
       render :new
     end
   end
 
+  def edit
+  end
+
   def update
+    if @room.update(set_param)
+      flash[:notice] = "Room of #{@room} updates!"
+      render :index
+    else
+      flash[:notice] = "Couldn't update room..."
+    end
+  end
+
+  def destroy
+    @room.destroy
+    flash[:notice] = "Room of #{@room} destroys."
+    render :index
   end
 
   private
