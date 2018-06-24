@@ -1,21 +1,20 @@
   <header class="header">
-    <div class="header__bar row">
+    <div class="header__bar">
+      <div></div>
       <h1 class="grid-6"><a href="/">FreeeChat</a></h1>
-      <% if user_signed_in? %>
-        <div class="user_nav grid-6">
-          <span><%= current_user.email %>
-            <ul class="user__info">
-              <li>
-                <a href="/users/<%= current_user.id %>">マイページ</a>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-              </li>
-            </ul>
+        <% if user_signed_in? %>
+        <h2 class="user_nav">
+          <span><%= current_user.name %></span>
+          <br>
+          <span>
+            <font face='arial'>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </font>
           </span>
-        </div>
+        </h2>
       <% else %>
         <div class="grid-6">
           <%= link_to "ログイン", new_user_session_path, class: 'post' %>
-          <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
         </div>
       <% end %>
     </div>
