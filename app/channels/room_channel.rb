@@ -4,7 +4,7 @@ class RoomChannel < ApplicationCable::Channel
   # このコードが呼び出される
   # コンシューマー(ユーザ)の接続はサブスクリプション（Subscription: 購読）と呼ばれます。
   def subscribed
-    stream_from "room_channel_#{params[:room_id]}"
+    stream_from "room_channel"
   end
 
   def unsubscribed
@@ -12,6 +12,5 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak
-    ActionCable.server.broadcast 'room_channel', message: data['message']
   end
 end

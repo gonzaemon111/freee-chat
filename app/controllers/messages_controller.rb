@@ -5,25 +5,28 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
     if @message.save
-      ActionCable.server.broadcast "messages_#{@message.chatroom_id}_channel",
+      ActionCable.server.broadcast "messages_#{@message.room_id}_channel",
                                    message: @message.content,
                                    user: @message.user.name,
                                    room: @message.room_id
+      redirect_to room_path
       head :ok  # 空のコンテンツを表示
     else
     end
   end
 
   private
+
   def set_room
-    @room = Room.find(params[:room_id])
+    logger.debug "loggerです！ #{params}"
+    @room = Room.find(params[:message][:room_id])
   end
 
   def message_params
-    params.require(:message).pemit(
+    logger.debug "ストロングパラメータだよ！ #{@room.id}"
+    params.require(:message).permit(
       :content,
-      :image
-      ).merge(
+      :image,
       user_id: current_user.id,
       room_id: @room.id
       )

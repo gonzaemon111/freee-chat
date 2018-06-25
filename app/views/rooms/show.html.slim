@@ -13,7 +13,7 @@
     .groups
       - current_user.rooms.each do |room|
         .group
-          = link_to room_messages_path(room) do
+          = link_to room_path(room) do
             .group__name
               = room.name
   .chatspace
@@ -30,7 +30,7 @@
         .right-header__button
           = link_to "Edit", edit_room_path(@room.id), class: "btn"
     .messages
-      - @messages.each do |message|
+      - @room.messages.each do |message|
         .message data-message-id=message.id
           .up-message
             .up-message__user-name
@@ -45,10 +45,4 @@
               = image_tag message.image.url, class: "down-message__image"
 
     .form
-      = form_for [@room , @message] do |f|
-        =f.text_field :content, class: 'form__message' , placeholder: 'type a message'
-          .form__mask
-            = f.label :image, class: 'form__mask__image' do |f|
-              = fa_icon 'picture-o' , class: 'icon'
-            = f.file_field :image, class: 'hidden'
-        = f.submit 'Send', class: 'form__submit'
+      = render partial: 'messages/message_form', locals: { message: @message, room: @room }
