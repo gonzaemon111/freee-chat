@@ -1,0 +1,15 @@
+header.header
+  .header__bar
+    div
+    h1.grid-6
+      a[href="/"]
+        | FreeeChat
+    - if user_signed_in?
+      h2.user_nav
+        br
+        span
+          font[face="arial"]
+            = link_to "log out", destroy_user_session_path, method: :delete
+    - else
+      .grid-6
+        = link_to "log in", new_user_session_path, class: 'post'
