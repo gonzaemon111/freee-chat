@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     if @message.save
       ActionCable.server.broadcast "messages_#{@message.room_id}_channel",
                                    id: @message.id,
-                                   message: @message[:content],
+                                   message: @message.content,
                                    time: @message.created_at.to_s(:published_on),
                                    user: @message.user.name,
                                    room: @message.room_id
