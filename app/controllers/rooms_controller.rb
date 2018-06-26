@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:edit , :update , :show , :destroy]
   def index
+    @room = Room.new
   end
 
   def new
@@ -25,11 +26,8 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    if @room.update(set_param)
+    if @room.update(room_params)
       flash[:notice] = "Room of #{@room} updates!"
       render :index
     else
