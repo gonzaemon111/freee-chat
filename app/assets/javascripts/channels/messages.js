@@ -61,8 +61,12 @@ function createChannel(channel, room) {
         renderMessage: function (data) {
             // 現在のroomとメッセージで指定されてるroomと一致してる場合、
             var current_page_room = $('input#message_room_id').val();
+            console.log("current_page_room : " + current_page_room);
             if (current_page_room == data.room) {
                 // メッセージを追加する
+                console.log("if文入ってるんだけど、まじびっくり！");
+                console.log(data);
+                console.log("<p> <b>" + data.user + ": </b>" + data.message + "</p>");
                 return "<p> <b>" + data.user + ": </b>" + data.message + "</p>";
             } else {
                 return

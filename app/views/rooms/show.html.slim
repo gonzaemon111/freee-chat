@@ -30,19 +30,8 @@
         .right-header__button
           = link_to "Edit", edit_room_path(@room.id), class: "btn"
     .messages
-      - @room.messages.each do |message|
-        .message data-message-id=message.id
-          .up-message
-            .up-message__user-name
-              = message.user.name
-            .up-message__date
-              = message.created_at.to_s(:published_on)
-          .down-message
-            - if message.content.present?
-              p.down-message__content
-                = message.content
-            - if message.image.present?
-              = image_tag message.image.url, class: "down-message__image"
+      #messages
+        = render partial: 'messages/message' , collection: @room.messages
 
     .form
       = render partial: 'messages/message_form', locals: { message: @message, room: @room }
