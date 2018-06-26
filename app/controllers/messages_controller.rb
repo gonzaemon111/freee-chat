@@ -10,7 +10,6 @@ class MessagesController < ApplicationController
       ActionCable.server.broadcast "messages_#{@message.room_id}_channel",
                                    id: @message.id,
                                    message: @message[:content],
-                                   image: @message.image,
                                    time: @message.created_at.to_s(:published_on),
                                    user: @message.user.name,
                                    room: @message.room_id
@@ -27,7 +26,6 @@ class MessagesController < ApplicationController
     logger.debug "ストロングパラメータだよ！"
     params.require(:message).permit(
       :content,
-      :image,
       :room_id
       )
   end

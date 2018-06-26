@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function () {
     }
 
     // デバッグ用
-    logOutputChannel();
+    // logOutputChannel();
 
 })
 
@@ -36,21 +36,21 @@ function createChannel(channel, room) {
 
     App.cable.subscriptions.create({channel: channel, room: room}, {
         // サブスクリプションがサーバー側で利用可能になると呼び出される
-        connected: function () {
-            console.log('< connected >');
-            return $('#messages').append("<p><b>debug:</b> ActionCable connected</p>");
-        },
-        // WebSocket接続が閉じると呼び出される
-        disconnected: function () {
-            console.log('< disconnected >');
-            return $('#messages').append("<p><b>debug:</b> ActionCable disconnected</p>");
-        },
-        // サブスクリプションがサーバーに拒否されると呼び出される
-        rejected: function () {
-            console.log('< rejected >');
-            return $('#messages').append("<p><b>debug:</b> ActionCable rejected</p>");
-            return
-        },
+        // connected: function () {
+        //     console.log('< connected >');
+        //     return $('#messages').append("<p><b>debug:</b> ActionCable connected</p>");
+        // },
+        // // WebSocket接続が閉じると呼び出される
+        // disconnected: function () {
+        //     console.log('< disconnected >');
+        //     return $('#messages').append("<p><b>debug:</b> ActionCable disconnected</p>");
+        // },
+        // // サブスクリプションがサーバーに拒否されると呼び出される
+        // rejected: function () {
+        //     console.log('< rejected >');
+        //     return $('#messages').append("<p><b>debug:</b> ActionCable rejected</p>");
+        //     return
+        // },
         received: function (data) {
             $("#messages").removeClass('hidden');
             return $('#messages').append(this.renderMessage(data));
@@ -67,7 +67,8 @@ function createChannel(channel, room) {
                 console.log("if文入ってるんだけど、まじびっくり！");
                 console.log(data);
                 console.log("<p> <b>" + data.user + ": </b>" + data.message + "</p>");
-                return "<p> <b>" + data.user + ": </b>" + data.message + "</p>";
+                return ("<div class=\"message\"><ul class=\"up-message\">" + data.user + "<li class=\"up-message__user-name\"></li><li class=\"up-message__date\">" + data.time + "</li></ul><ul class=\"down-message\"><li class=\"down-message__content\">" +data.message + "</li></ul></div>");
+
             } else {
                 return
             }
@@ -178,24 +179,24 @@ function countAllChannel() {
 /**
  * 【デバッグ用】購読中のチャンネル情報をログ出力する
  */
-function logOutputChannel() {
-    console.log('++++++++++debug++++++++++');
-    console.log('Subscribed channel');
+// function logOutputChannel() {
+//     console.log('++++++++++debug++++++++++');
+//     console.log('Subscribed channel');
 
-    // 購読中のチャンネル数
-    var count = App.cable.subscriptions['subscriptions'].length;
-    console.log('> count:' + count);
+//     // 購読中のチャンネル数
+//     var count = App.cable.subscriptions['subscriptions'].length;
+//     console.log('> count:' + count);
 
-    // 購読中のチャンネル情報
-    var subscriptions = App.cable.subscriptions['subscriptions'];
-    subscriptions.forEach(function (subscription) {
-        var identifier = subscription.identifier;
+//     // 購読中のチャンネル情報
+//     var subscriptions = App.cable.subscriptions['subscriptions'];
+//     subscriptions.forEach(function (subscription) {
+//         var identifier = subscription.identifier;
 
-        obj = JSON.parse(identifier);
-        //=> {channel: "MessagesChannel", room: "1"}
+//         obj = JSON.parse(identifier);
+//         //=> {channel: "MessagesChannel", room: "1"}
 
-        console.log('> channnel:' + obj.channel + ',room:' + obj.room);
+//         console.log('> channnel:' + obj.channel + ',room:' + obj.room);
 
-    });
-    console.log('+++++++++++++++++++++++++');
-}
+//     });
+//     console.log('+++++++++++++++++++++++++');
+// }
