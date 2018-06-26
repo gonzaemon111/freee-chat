@@ -1,31 +1,32 @@
 class MessagesController < ApplicationController
-  before_action :set_room
 
   def create
     @message = Message.new(message_params)
+    logger.debug "1---------------------------"
     @message.user = current_user
+    logger.debug "2---------------------------"
+    logger.debug "#{message_params}"
     if @message.save
-      ActionCable.server.broadcast "messages_#{@message.chatroom_id}_channel",
-                                   message: @message.content,
+      ActionCable.server.broadcast "messages_#{@message.room_id}_channel",
+                                   id: @message.id,
+                                   message: @message[:content],
+                                   time: @message.created_at.to_s(:published_on),
                                    user: @message.user.name,
                                    room: @message.room_id
+      Rails.logger.debug "ここまでOK"
       head :ok  # 空のコンテンツを表示
+      # render :template => "rooms/show"
     else
     end
   end
 
   private
-  def set_room
-    @room = Room.find(params[:room_id])
-  end
 
   def message_params
-    params.require(:message).pemit(
+    logger.debug "ストロングパラメータだよ！"
+    params.require(:message).permit(
       :content,
-      :image
-      ).merge(
-      user_id: current_user.id,
-      room_id: @room.id
+      :room_id
       )
   end
 end

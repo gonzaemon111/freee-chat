@@ -4,17 +4,18 @@ class RoomsController < ApplicationController
   end
 
   def new
+    # Roomクラスのインスタンス生成する。
     @room = Room.new
     @room.users << current_user
   end
 
   def show
+    # Messageクラスのインスタンスを生成する。
     @message = Message.new
   end
 
   def create
     @room = Room.new(room_params)
-    @room.users << current_user
 
     if @room.save
       redirect_to rooms_path

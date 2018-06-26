@@ -12,7 +12,14 @@
   .groups
     - current_user.rooms.each do |room|
       .group
-        = link_to room_messages_path(room) do
+        = link_to room_path(room) do
           .group__name
             = room.name
-
+        .more
+          span
+            = image_tag 'arrow_top.png'
+          ul.more_list
+            li
+              = link_to '編集', "/rooms/#{room.id}/edit", method: :get
+            li
+              = link_to '削除', "/rooms/#{room.id}", method: :delete
