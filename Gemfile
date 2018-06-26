@@ -54,10 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'slim-rails'
-gem 'font-awesome-rails'
 gem 'html2slim'
-gem 'mini_magick'
-gem 'carrierwave'
 gem 'jquery-rails'
 gem 'redis'
 gem 'redis-rails'
