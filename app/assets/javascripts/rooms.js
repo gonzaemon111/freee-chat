@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 function submitNewMessage(){
-    $('textarea#message_content').keydown(function(event) {
+    $('#new_message').keydown(function(event) {
         if (event.keyCode == 13) {
             $('[data-send="message"]').click();
             $('[data-textarea="message"]').val(" ")
